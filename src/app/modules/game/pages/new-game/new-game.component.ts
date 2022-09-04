@@ -1,5 +1,12 @@
+//Imports
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+//Models
+import { JugadorModel } from '../../models/jugador.model';
+
+//Services
+import { JugadoresFakeService } from '../../services/jugadores-fake.service';
 
 @Component({
   selector: 'app-new-game',
@@ -8,8 +15,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class NewGameComponent implements OnInit {
   frmJugadores: FormGroup;
+  jugadoresFake?: JugadorModel[];
 
-  constructor() {
+  constructor(private jugadores$: JugadoresFakeService ) {
     this.frmJugadores = this.createFormJugadores();
   }
 
@@ -23,5 +31,13 @@ export class NewGameComponent implements OnInit {
     console.log("Submit: " ,this.frmJugadores.getRawValue());
   };
 
-  ngOnInit(): void {}
+
+
+  ngOnInit(): void {
+
+    this.jugadoresFake = this.jugadores$.getJugadores();
+    console.log(this.jugadoresFake);
+
+
+  }
 }
