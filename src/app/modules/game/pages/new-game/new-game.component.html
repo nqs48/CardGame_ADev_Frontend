@@ -1,32 +1,46 @@
 <app-header-nav></app-header-nav>
 <div class="w-full min-h-screen flex justify-center items-center bg-main">
   <div class="w-1/2 bg-main03 m-10 rounded-lg px-20">
-
     <h2 class="m-1 py-4 font-semibold text-xl text-white">Players Available</h2>
 
-    <form class=" flex flex-col justify-center  " id="formJugadores" [formGroup]="frmJugadores"  (ngSubmit)="submitJugadores()">
-      <select  name="Jugadores" multiple class="jugadores" formControlName="jugadores">
-        <option  *ngFor="let j of jugadoresFake" [value]="j.uid">{{ j.name }}</option>
+    <form
+      class="flex flex-col justify-center"
+      id="formJugadores"
+      [formGroup]="frmJugadores"
+      (ngSubmit)="submitJugadores()"
+    >
+      <select
+        name="Jugadores"
+        multiple
+        class="jugadores"
+        formControlName="jugadores"
+      >
+        <option *ngFor="let j of jugadoresFake" [value]="j.uid">
+          {{ j.name }}
+        </option>
       </select>
       <div class="w-full flex justify-center items-center">
-          <button class="flex h-10 m-5 items-center justify-center gap-2 rounded-md bg-red-700 hover:bg-blue-800 px-5 py-3 text-lg font-medium text-white hover:shadow transition duration-150"
-            [disabled]="frmJugadores.invalid" (click)="goBoard()" type="submit">
-            Start Game
-          </button>
+        <button
+          class="flex h-10 m-5 items-center justify-center gap-2 rounded-md bg-red-700 hover:bg-blue-800 px-5 py-3 text-lg font-medium text-white hover:shadow transition duration-150"
+          [disabled]="frmJugadores.invalid"
+          (click)="goBoard()"
+          type="submit"
+        >
+          Start Game
+        </button>
 
-          <div class="w-fit p-3 m-10 bg-red-200" *ngIf="frmJugadores.get('jugadores')?.hasError('required')">
-        <h2 class="text-red-600 font-bold">
-          Debes seleccionar al menos un jugador
-        </h2>
-      </div>
+        <div
+          class="w-fit p-3 m-10 bg-red-200"
+          *ngIf="frmJugadores.get('jugadores')?.hasError('required')"
+        >
+          <h2 class="text-red-600 font-bold rounded-xl">
+            You must select at least one player
+          </h2>
         </div>
-
-
+      </div>
     </form>
-
   </div>
 </div>
-
 
 <!-- Dropdown menu -->
 <!-- <div class="w-full h-full flex justify-center items-center">
@@ -61,4 +75,3 @@
 
 
 </div> -->
-

@@ -1,24 +1,24 @@
-<div class="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
-  <h1 class="text-4xl font-medium">Login</h1>
-  <p class="text-slate-500">Hi, Welcome back 👋</p>
+<div class="p-10 flex flex-col w-full shadow-xl rounded-xl">
+  <h1 class="text-4xl font-medium text-white">Login</h1>
+  <p class="text-gray-400">Hi, Welcome back 👋</p>
 
   <div class="my-5 flex justify-center">
     <button
       (click)="btnLogin()"
       type="submit"
-      class="w-72 text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
+      class="w-72 text-center text-white hover:bg-gray-900 py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
     >
       <img
         src="https://www.svgrepo.com/show/355037/google.svg"
         class="w-6 h-6"
         alt=""
       />
-      <span>Login with Google</span>
+      <span class="text-white">Login with Google</span>
     </button>
   </div>
   <form action="" class="w-full">
     <div id="input" class="flex flex-col w-full my-5">
-      <label for="username" class="text-gray-500 mb-2">Username</label>
+      <label for="username" class="text-gray-100 mb-2">Username</label>
       <input
         type="text"
         id="username"
@@ -27,27 +27,27 @@
       />
     </div>
     <div id="input" class="flex flex-col w-full my-5">
-      <label for="password" class="text-gray-500 mb-2">Password</label>
+      <label for="password" class="text-gray-100 mb-2">Password</label>
       <input
         type="password"
         id="password"
         placeholder="Please insert your password"
-        class="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
+        class="text-gray-400 appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
       />
     </div>
     <div class="flex flex-row justify-between my-10">
       <div>
-        <label for="remember" class="">
+        <label for="remember" class="text-gray-100">
           <input
             type="checkbox"
             id="remember"
-            class="w-4 h-4 border-slate-200 focus:bg-indigo-600"
+            class="w-4 h-4 border-slate-200 focus:bg-indigo-600 text-gray-100"
           />
           Remember me
         </label>
       </div>
       <div>
-        <a href="#" class="font-medium text-blue-800">Forgot Password?</a>
+        <a href="#" class="font-medium text-white hover:text-red-800 ">Forgot Password?</a>
       </div>
     </div>
     <div id="button" class="flex flex-col w-full my-5">
