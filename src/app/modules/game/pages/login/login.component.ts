@@ -8,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   title = 'Card Game by ADev';
-  
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  btnLogin(): void{
+
+    console.log("Autenticacion con google")
+
   }
+
+
+
 
 }
