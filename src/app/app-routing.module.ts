@@ -11,6 +11,7 @@ import {
 import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
 import { LoginComponent } from './modules/game/pages/login/login.component';
 import { HomeComponent } from './modules/game/pages/home/home.component';
+import { GamesComponent } from './modules/game/pages/games/games.component';
 // import { GameGuard } from './modules/game/guards/game.guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
@@ -32,6 +33,13 @@ const routes: Routes = [
   {
     path: 'newgame',
     component: NewGameComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    // canActivate: [ GameGuard ],
+  },
+  {
+    path: 'games',
+    component: GamesComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     // canActivate: [ GameGuard ],

@@ -4,7 +4,7 @@
 
 <form id="formJugadores" [formGroup]="frmJugadores"  (ngSubmit)="submitJugadores()">
   <select name="Jugadores" multiple class="jugadores" formControlName="jugadores">
-    <option *ngFor="let j of jugadoresFake" [value]="j.id">{{ j.name }}</option>
+    <option *ngFor="let j of jugadoresFake" [value]="j.uid">{{ j.name }}</option>
   </select>
   <button [disabled]="frmJugadores.invalid" type="submit" class="w-72 text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
       <img src="https://www.svgrepo.com/show/199915/login.svg" class="w-6 h-6" alt=""> <span>Create Game</span>

@@ -1,6 +1,7 @@
 //Imports
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CreateUserService } from 'src/app/modules/shared/services/createUser.service';
 
 //Models
 import { JugadorModel } from '../../models/jugador.model';
@@ -19,6 +20,7 @@ export class NewGameComponent implements OnInit {
 
   constructor(
     private jugadores$: JugadoresFakeService,
+    private createUserService$: CreateUserService
     ) {
     this.frmJugadores = this.createFormJugadores();
   }
@@ -40,7 +42,9 @@ export class NewGameComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.jugadoresFake = this.jugadores$.getJugadores();
-    console.log(this.jugadoresFake);
-  }
+    // this.jugadoresFake = this.jugadores$.getJugadores();
+    // console.log(this.jugadoresFake);
+    this.createUserService$.getAllUser().subscribe({next: (data)=>{this.jugadoresFake = data; console.log(data)}});
+    }
+
 }

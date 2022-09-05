@@ -1,6 +1,7 @@
 
 
 export interface JugadorModel {
-  id: string;
-  name: string;
+  uid: string | null;
+  name: string | null;
+
 }

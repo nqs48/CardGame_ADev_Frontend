@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 
 @Component({
@@ -8,12 +9,19 @@ import { AuthService } from 'src/app/modules/shared/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderNavComponent implements OnInit {
-  constructor(private authService$: AuthService) {}
+  constructor(
+    private authService$: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   btnLogout(): void {
     console.log('Logout: Sales del sistema');
     this.authService$.logout();
+  }
+
+  btnGames(): void {
+    this.router.navigate(['/games']);
   }
 }

@@ -13,22 +13,22 @@ export class JugadoresFakeService {
   getJugadores(): JugadorModel[] {
 
     let jugador01: JugadorModel = {
-      id: "1",
+      uid: "1",
       name: "Nestea Qs"
     };
 
     let jugador02: JugadorModel = {
-      id: "2",
+      uid: "2",
       name: "Noah Alek"
     };
 
     let jugador03: JugadorModel = {
-      id: '3',
+      uid: '3',
       name: 'James Pickford',
     };
 
     let jugador04: JugadorModel = {
-      id: '4',
+      uid: '4',
       name: 'Harry Styles',
     };
 

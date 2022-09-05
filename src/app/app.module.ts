@@ -19,10 +19,13 @@ import { LoginComponent } from './modules/game/pages/login/login.component';
 import { HeaderNavComponent } from './modules/game/components/header-nav/header-nav.component';
 import { ComponentsModule } from './modules/game/components/components.module';
 import { HomeComponent } from './modules/game/pages/home/home.component';
+import { GamesComponent } from './modules/game/pages/games/games.component';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 
 @NgModule({
-  declarations: [AppComponent, NewGameComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, NewGameComponent, LoginComponent, HomeComponent, GamesComponent],
   imports: [
     ComponentsModule,
     BrowserModule,
@@ -31,6 +34,9 @@ import { HomeComponent } from './modules/game/pages/home/home.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    provideFirestore(() => getFirestore()),
+    provideFirebaseApp(()=> initializeApp(environment.firebaseConfig))
+
   ],
   providers: [],
   bootstrap: [AppComponent],
