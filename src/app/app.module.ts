@@ -22,10 +22,11 @@ import { HomeComponent } from './modules/game/pages/home/home.component';
 import { GamesComponent } from './modules/game/pages/games/games.component';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { GameboardComponent } from './modules/game/pages/gameboard/gameboard.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NewGameComponent, LoginComponent, HomeComponent, GamesComponent],
+  declarations: [AppComponent, NewGameComponent, LoginComponent, HomeComponent, GamesComponent, GameboardComponent],
   imports: [
     ComponentsModule,
     BrowserModule,

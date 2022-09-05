@@ -12,6 +12,7 @@ import { NewGameComponent } from './modules/game/pages/new-game/new-game.compone
 import { LoginComponent } from './modules/game/pages/login/login.component';
 import { HomeComponent } from './modules/game/pages/home/home.component';
 import { GamesComponent } from './modules/game/pages/games/games.component';
+import { GameboardComponent } from './modules/game/pages/gameboard/gameboard.component';
 // import { GameGuard } from './modules/game/guards/game.guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
@@ -40,6 +41,13 @@ const routes: Routes = [
   {
     path: 'games',
     component: GamesComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    // canActivate: [ GameGuard ],
+  },
+  {
+    path: 'gameboard',
+    component:GameboardComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     // canActivate: [ GameGuard ],

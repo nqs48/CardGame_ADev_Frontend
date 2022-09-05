@@ -1,6 +1,7 @@
 //Imports
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CreateUserService } from 'src/app/modules/shared/services/createUser.service';
 
 //Models
@@ -20,8 +21,9 @@ export class NewGameComponent implements OnInit {
 
   constructor(
     private jugadores$: JugadoresFakeService,
-    private createUserService$: CreateUserService
-    ) {
+    private createUserService$: CreateUserService,
+    private router: Router
+  ) {
     this.frmJugadores = this.createFormJugadores();
   }
 
@@ -41,10 +43,18 @@ export class NewGameComponent implements OnInit {
 
   // }
 
+  goBoard(): void {
+    this.router.navigate(['/gameboard']);
+  }
+
   ngOnInit(): void {
     // this.jugadoresFake = this.jugadores$.getJugadores();
     // console.log(this.jugadoresFake);
-    this.createUserService$.getAllUser().subscribe({next: (data)=>{this.jugadoresFake = data; console.log(data)}});
-    }
-
+    this.createUserService$.getAllUser().subscribe({
+      next: (data) => {
+        this.jugadoresFake = data;
+        console.log(data);
+      },
+    });
+  }
 }
