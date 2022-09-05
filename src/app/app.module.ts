@@ -16,11 +16,15 @@ import { AppComponent } from './templates/cards/app.component';
 //Components
 import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
 import { LoginComponent } from './modules/game/pages/login/login.component';
+import { HeaderNavComponent } from './modules/game/components/header-nav/header-nav.component';
+import { ComponentsModule } from './modules/game/components/components.module';
+import { HomeComponent } from './modules/game/pages/home/home.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NewGameComponent, LoginComponent],
+  declarations: [AppComponent, NewGameComponent, LoginComponent, HomeComponent],
   imports: [
+    ComponentsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

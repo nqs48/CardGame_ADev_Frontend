@@ -17,7 +17,9 @@ export class NewGameComponent implements OnInit {
   frmJugadores: FormGroup;
   jugadoresFake?: JugadorModel[];
 
-  constructor(private jugadores$: JugadoresFakeService ) {
+  constructor(
+    private jugadores$: JugadoresFakeService,
+    ) {
     this.frmJugadores = this.createFormJugadores();
   }
 
@@ -27,17 +29,18 @@ export class NewGameComponent implements OnInit {
     });
   }
 
-  public submitJugadores(){
-    console.log("Submit: " ,this.frmJugadores.getRawValue());
-  };
+  public submitJugadores() {
+    console.log('Submit: ', this.frmJugadores.getRawValue());
+  }
 
+  // btnLogout():void{
+  //   console.log('Logout: Sales del sistema')
+  //   this.authService$.logout();
 
+  // }
 
   ngOnInit(): void {
-
     this.jugadoresFake = this.jugadores$.getJugadores();
     console.log(this.jugadoresFake);
-
-
   }
 }
