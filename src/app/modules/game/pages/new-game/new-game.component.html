@@ -1,19 +1,64 @@
-
 <app-header-nav></app-header-nav>
-<h2>Mi Primer formulario reactivo</h2>
+<div class="w-full min-h-screen flex justify-center items-center bg-main">
+  <div class="w-1/2 bg-main03 m-10 rounded-lg px-20">
 
-<form id="formJugadores" [formGroup]="frmJugadores"  (ngSubmit)="submitJugadores()">
-  <select name="Jugadores" multiple class="jugadores" formControlName="jugadores">
-    <option *ngFor="let j of jugadoresFake" [value]="j.uid">{{ j.name }}</option>
-  </select>
-  <button [disabled]="frmJugadores.invalid" (click)="goBoard()" type="submit" class="w-72 text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
-      <img src="https://www.svgrepo.com/show/199915/login.svg" class="w-6 h-6" alt=""> <span>Create Game</span>
-  </button>
+    <h2 class="m-1 py-4 font-semibold text-xl text-white">Players Available</h2>
 
-  <div class="w-fit p-3 m-10 bg-red-200" *ngIf="frmJugadores.get('jugadores')?.hasError('required')">
-    <h2 class="text-red-600 font-bold">
-      Debes seleccionar al menos un jugador
-    </h2>
+    <form class=" flex flex-col justify-center  " id="formJugadores" [formGroup]="frmJugadores"  (ngSubmit)="submitJugadores()">
+      <select  name="Jugadores" multiple class="jugadores" formControlName="jugadores">
+        <option  *ngFor="let j of jugadoresFake" [value]="j.uid">{{ j.name }}</option>
+      </select>
+      <div class="w-full flex justify-center items-center">
+          <button class="flex h-10 m-5 items-center justify-center gap-2 rounded-md bg-red-700 hover:bg-blue-800 px-5 py-3 text-lg font-medium text-white hover:shadow transition duration-150"
+            [disabled]="frmJugadores.invalid" (click)="goBoard()" type="submit">
+            Start Game
+          </button>
+
+          <div class="w-fit p-3 m-10 bg-red-200" *ngIf="frmJugadores.get('jugadores')?.hasError('required')">
+        <h2 class="text-red-600 font-bold">
+          Debes seleccionar al menos un jugador
+        </h2>
+      </div>
+        </div>
+
+
+    </form>
+
   </div>
-</form>
+</div>
+
+
+<!-- Dropdown menu -->
+<!-- <div class="w-full h-full flex justify-center items-center">
+
+<div class="w-1/2 h-full bg-gray-50">
+    <div class="p-3">
+      <label for="input-group-search" class="sr-only">Search</label>
+      <div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400"  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+        </div>
+        <input type="text" id="input-group-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search user">
+      </div>
+    </div>
+
+    <ul class="overflow-y-auto px-3 pb-3 h-48 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownSearchButton">
+      <li>
+        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+          <input id="checkbox-item-11" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+          <label for="checkbox-item-11" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Bonnie Green</label>
+        </div>
+      </li>
+    </ul>
+
+    <div class="w-full flex justify-center">
+      <button [disabled]="frmJugadores.invalid" (click)="goBoard()" type="submit" class="w-72 text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+        <img src="https://www.svgrepo.com/show/199915/login.svg" class="w-6 h-6" alt=""> <span>Create Game</span>
+      </button>
+    </div>
+
+    </div>
+
+
+</div> -->
 

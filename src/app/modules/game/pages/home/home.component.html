@@ -1,5 +1,5 @@
 <app-header-nav></app-header-nav>
-<section class="text-gray-400 bg-gray-900 body-font min-h-screen">
+<section class="text-gray-400 bg-main03 body-font min-h-screen">
   <div class="container px-5 py-24 mx-auto flex flex-wrap ">
     <div class="flex flex-wrap w-full">
       <div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
@@ -30,7 +30,7 @@
             >
               STEP 1
             </h2>
-            <p class="leading-relaxed">
+            <p class="leading-relaxed ">
               VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk
               bespoke try-hard cliche palo santo offal.
             </p>
@@ -63,7 +63,7 @@
             >
               STEP 2
             </h2>
-            <p class="leading-relaxed">
+            <p class="leading-relaxed ">
               Vice migas literally kitsch +1 pok pok. Truffaut hot chicken
               slow-carb health goth, vape typewriter.
             </p>
@@ -169,12 +169,12 @@
       </div>
       <div class="flex min-h-fit justify-center overflow-hidden py-6 sm:py-12">
         <div
-          class="flex flex-col justify-center mx-auto max-w-4xl rounded-3xl bg-[#092540] p-20 text-center"
+          class="flex flex-col justify-center mx-auto max-w-4xl rounded-3xl bg-main03 p-20 text-center"
         >
-          <h2 class="text-5xl font-bold leading-tight text-white">
+          <h2 class="text-5xl font-bold leading-tight text-gray">
             Grow rapidly with our unlimited Web Design & development
           </h2>
-          <p class="mt-5 text-xl leading-8 text-white">
+          <p class="mt-5 text-xl leading-8 text-gray-10 bg-black rounded-xl">
             Get unlimited design & development requests for a flat monthly rate.
             Fast turnaround. No contracts or surprises. Cancel anytime.
           </p>
@@ -182,7 +182,7 @@
             <button
             (click)="btnNewGame()"
             type="button"
-              class="flex items-center justify-center gap-2 rounded-full bg-blue-800 px-5 py-3 text-lg font-medium text-white"
+              class="flex items-center justify-center gap-2 rounded-md bg-red-700 hover:bg-blue-800 px-5 py-3 text-lg font-medium text-white"
             >
               <span>Create Game</span>
               <span
@@ -199,17 +199,18 @@
                   /></svg
               ></span>
             </button>
-            <button
-              class="flex items-center justify-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-lg font-medium text-white"
+            <button (click)="btnHistory()"
+              class="flex items-center justify-center gap-2 rounded-md hover:bg-gray-700 bg-gray-600 text-white px-5 py-3 text-lg font-medium text-white"
             >
               <span>History Games</span>
-              <span
+              <span class="text-black"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
                   fill="none"
+
                 >
                   <path
                     d="M6.00156 13.4016L4.60156 12.0016L8.60156 8.00156L4.60156 4.00156L6.00156 2.60156L11.4016 8.00156L6.00156 13.4016Z"

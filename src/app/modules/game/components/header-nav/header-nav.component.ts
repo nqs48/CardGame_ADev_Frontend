@@ -24,4 +24,8 @@ export class HeaderNavComponent implements OnInit {
   btnGames(): void {
     this.router.navigate(['/games']);
   }
+
+  btnIndex(): void{
+    this.router.navigate(['/home']);
+  }
 }

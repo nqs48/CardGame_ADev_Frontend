@@ -13,4 +13,8 @@ export class HomeComponent implements OnInit {
   btnNewGame(): void {
     this.router.navigate(['/newgame']);
   }
+
+  btnHistory(): void {
+    this.router.navigate(['/games']);
+  }
 }
