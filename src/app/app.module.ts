@@ -15,19 +15,27 @@ import { AppComponent } from './templates/cards/app.component';
 
 //Components
 import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
-import { LoginComponent } from './modules/game/pages/login/login.component';
-import { HeaderNavComponent } from './modules/game/components/header-nav/header-nav.component';
 import { ComponentsModule } from './modules/game/components/components.module';
 import { HomeComponent } from './modules/game/pages/home/home.component';
 import { GamesComponent } from './modules/game/pages/games/games.component';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { GameboardComponent } from './modules/game/pages/gameboard/gameboard.component';
-
+import { AuthModule } from './modules/auth/auth.module';
+import { FormLoginComponent } from './modules/auth/components/form-login/form-login.component';
+import { InitComponent } from './modules/game/pages/init/init.component';
 
 @NgModule({
-  declarations: [AppComponent, NewGameComponent, LoginComponent, HomeComponent, GamesComponent, GameboardComponent],
+  declarations: [
+    AppComponent,
+    NewGameComponent,
+    HomeComponent,
+    GamesComponent,
+    GameboardComponent,
+    InitComponent,
+  ],
   imports: [
+    AuthModule,
     ComponentsModule,
     BrowserModule,
     AppRoutingModule,
@@ -36,8 +44,7 @@ import { GameboardComponent } from './modules/game/pages/gameboard/gameboard.com
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     provideFirestore(() => getFirestore()),
-    provideFirebaseApp(()=> initializeApp(environment.firebaseConfig))
-
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
   ],
   providers: [],
   bootstrap: [AppComponent],
