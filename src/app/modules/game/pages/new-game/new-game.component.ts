@@ -2,15 +2,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CreateGameService } from 'src/app/modules/shared/services/createGame.service';
-import { CreateUserService } from 'src/app/modules/shared/services/createUser.service';
-import { SocketService } from 'src/app/modules/shared/services/web-socket/socket.service';
 import { v4 } from 'uuid';
 
 //Models
 import { JugadorModel } from '../../models/jugador.model';
 
 //Services
+import { CreateGameService } from 'src/app/modules/shared/services/createGame.service';
+import { GamerService } from 'src/app/modules/shared/services/gamer/gamer.service';
+import { SocketService } from 'src/app/modules/shared/services/web-socket/socket.service';
 import { JugadoresFakeService } from '../../services/jugadores-fake.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
   constructor(
     private jugadores$: JugadoresFakeService,
-    private createUserService$: CreateUserService,
+    private gamerService$: GamerService,
     private router: Router,
     private createGameService$: CreateGameService,
     private websocketService$: SocketService
@@ -42,20 +42,18 @@ export class NewGameComponent implements OnInit, OnDestroy {
       error: (err) => console.log(err),
       complete: () => console.log('complete'),
     });
-
-    // this.jugadoresFake = this.jugadores$.getJugadores();
-    // console.log(this.jugadoresFake);
-    this.createUserService$.getAllUser().subscribe({
+    this.gamerService$.getAllGamers().subscribe({
       next: (data) => {
         this.jugadoresFake = data;
-        // console.log(data);
       },
     });
   }
 
+
   ngOnDestroy(): void {
     this.websocketService$.disconnect();
   }
+
 
   private createFormJugadores(): FormGroup {
     return new FormGroup({
@@ -66,12 +64,6 @@ export class NewGameComponent implements OnInit, OnDestroy {
   public submitJugadores() {
     console.log('Submit: ', this.frmJugadores.getRawValue());
   }
-
-  // btnLogout():void{
-  //   console.log('Logout: Sales del sistema')
-  //   this.authService$.logout();
-
-  // }
 
   goBoard(): void {
     // this.router.navigate(['/games']);
@@ -91,19 +83,5 @@ export class NewGameComponent implements OnInit, OnDestroy {
       });
   }
 
-  // submitData(){
-  //   this.createGameService$
-  //     .createGame({
 
-  //       "juegoId": "123",
-  //       "jugadores": {
-  //         "uid-001": "Nestea",
-  //         "uid-002": "Andy",
-  //       },
-  //       "jugadorPrincipalId": "uid-001",
-  //     })
-  //     .subscribe((s) => {
-  //       console.log('suscribe');
-  //     });
-  // }
 }

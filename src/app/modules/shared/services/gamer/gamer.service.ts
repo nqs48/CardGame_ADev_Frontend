@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, setDoc, CollectionReference, collectionData, doc, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { JugadorModel } from '../../game/models/jugador.model';
+import { JugadorModel } from '../../../game/models/jugador.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CreateUserService {
-  
+export class GamerService {
+
   private jugadoresRef: CollectionReference= collection(
     this.firestore$,
     'jugadores'
@@ -15,12 +15,12 @@ export class CreateUserService {
 
   constructor(private firestore$: Firestore) {}
 
-  addUser(jugador: JugadorModel) {
+  addGamer(jugador: JugadorModel) {
     const gamerRef = doc(this.jugadoresRef, jugador.uid || "");
     return setDoc(gamerRef, jugador);
   }
 
-  getAllUser(): Observable<JugadorModel[]> {
+  getAllGamers(): Observable<JugadorModel[]> {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
 }

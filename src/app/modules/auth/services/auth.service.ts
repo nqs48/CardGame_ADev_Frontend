@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { GoogleAuthProvider, AuthProvider } from 'firebase/auth';
 import { JugadorModel } from '../../game/models/jugador.model';
 import { JugadoresFakeService } from '../../game/services/jugadores-fake.service';
-import { CreateUserService } from '../../shared/services/createUser.service';
+import { GamerService } from '../../shared/services/gamer/gamer.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class AuthService {
     private router: Router,
     private afAuth: AngularFireAuth,
     private gamers$: JugadoresFakeService,
-    private createUser$: CreateUserService
+    private createUser$: GamerService
   ) {}
 
   logout(): void {
@@ -49,7 +49,7 @@ export class AuthService {
           uid: res.user?.uid || '',
           name: res.user?.displayName || '',
         };
-        this.createUser$.addUser(gamer).then((res) => {
+        this.createUser$.addGamer(gamer).then((res) => {
           console.log('Usuario creado');
         });
         //console.log(res.user?.getIdToken().then(console.log));

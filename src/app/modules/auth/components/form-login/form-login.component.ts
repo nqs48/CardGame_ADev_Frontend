@@ -13,7 +13,7 @@ export class FormLoginComponent implements OnInit {
   ngOnInit(): void {}
 
   btnLogin(): void {
-    console.log('Autenticacion con google');
+    console.log('Autenticación con google');
     this.authService$.SigninWithGoogle();
   }
 }
