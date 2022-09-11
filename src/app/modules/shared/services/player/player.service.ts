@@ -6,7 +6,7 @@ import { JugadorModel } from '../../../game/models/jugador.model';
 @Injectable({
   providedIn: 'root',
 })
-export class GamerService {
+export class PlayerService {
 
   private jugadoresRef: CollectionReference= collection(
     this.firestore$,
@@ -23,6 +23,7 @@ export class GamerService {
   getAllGamers(): Observable<JugadorModel[]> {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
+  
 }
 
 

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { GoogleAuthProvider, AuthProvider } from 'firebase/auth';
 import { JugadorModel } from '../../game/models/jugador.model';
 import { JugadoresFakeService } from '../../game/services/jugadores-fake.service';
-import { GamerService } from '../../shared/services/gamer/gamer.service';
+import { PlayerService } from '../../shared/services/player/player.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class AuthService {
     private router: Router,
     private afAuth: AngularFireAuth,
     private gamers$: JugadoresFakeService,
-    private createUser$: GamerService
+    private createUser$: PlayerService
   ) {}
 
   logout(): void {

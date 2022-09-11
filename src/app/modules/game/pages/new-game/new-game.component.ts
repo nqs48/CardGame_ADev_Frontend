@@ -8,8 +8,8 @@ import { v4 } from 'uuid';
 import { JugadorModel } from '../../models/jugador.model';
 
 //Services
-import { CreateGameService } from 'src/app/modules/shared/services/createGame.service';
-import { GamerService } from 'src/app/modules/shared/services/gamer/gamer.service';
+import { GameService } from 'src/app/modules/shared/services/game/game.service';
+import { PlayerService } from 'src/app/modules/shared/services/player/player.service';
 import { SocketService } from 'src/app/modules/shared/services/web-socket/socket.service';
 import { JugadoresFakeService } from '../../services/jugadores-fake.service';
 
@@ -18,18 +18,16 @@ import { JugadoresFakeService } from '../../services/jugadores-fake.service';
   templateUrl: './new-game.component.html',
   styleUrls: ['./new-game.component.css'],
 })
-
 export class NewGameComponent implements OnInit, OnDestroy {
-
   uuid!: string;
   frmJugadores: FormGroup;
   jugadoresFake?: JugadorModel[];
 
   constructor(
     private jugadores$: JugadoresFakeService,
-    private gamerService$: GamerService,
+    private gamerService$: PlayerService,
     private router: Router,
-    private createGameService$: CreateGameService,
+    private gameService$: GameService,
     private websocketService$: SocketService
   ) {
     this.frmJugadores = this.createFormJugadores();
@@ -49,11 +47,9 @@ export class NewGameComponent implements OnInit, OnDestroy {
     });
   }
 
-
   ngOnDestroy(): void {
     this.websocketService$.disconnect();
   }
-
 
   private createFormJugadores(): FormGroup {
     return new FormGroup({
@@ -67,7 +63,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
   goBoard(): void {
     // this.router.navigate(['/games']);
-    this.createGameService$
+    this.gameService$
       .createGame({
         juegoId: this.uuid,
         jugadores: {
@@ -82,6 +78,4 @@ export class NewGameComponent implements OnInit, OnDestroy {
         complete: () => console.log('complete'),
       });
   }
-
-
 }
