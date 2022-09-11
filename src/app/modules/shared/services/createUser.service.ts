@@ -7,6 +7,7 @@ import { JugadorModel } from '../../game/models/jugador.model';
   providedIn: 'root',
 })
 export class CreateUserService {
+  
   private jugadoresRef: CollectionReference= collection(
     this.firestore$,
     'jugadores'
