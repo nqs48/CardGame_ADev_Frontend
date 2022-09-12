@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { GameService } from 'src/app/modules/shared/services/game/game.service';
 
 @Component({
@@ -8,30 +9,26 @@ import { GameService } from 'src/app/modules/shared/services/game/game.service';
   styleUrls: ['./games.component.css'],
 })
 export class GamesComponent implements OnInit {
-
-  games: any ;
+  games: any;
 
   constructor(
     private router: Router,
     private gameService$: GameService,
-    ) {}
+
+  ) {}
 
   ngOnInit(): void {
-
     this.gameService$.getAllGames().subscribe({
       next: (data) => {
-        console.log('Return data games: ', data)
-        this.games=data;
-
+        console.log('Return data games: ', data);
+        this.games = data;
       },
       error: (err) => console.log(err),
       complete: () => console.log('complete'),
-
     });
-
   }
 
-  startGame() {
+  goBoard() {
     this.router.navigate(['/gameboard']);
   }
 }

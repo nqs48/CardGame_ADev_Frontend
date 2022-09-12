@@ -24,6 +24,8 @@ export class PlayerService {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
 
+
+
 }
 
 

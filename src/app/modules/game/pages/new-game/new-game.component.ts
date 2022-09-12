@@ -25,6 +25,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
   frmJugadores: FormGroup;
   jugadoresFake?: JugadorModel[];
   jugadores?: JugadorModel[];
+  actualPlayer!: string;
 
   constructor(
     private jugadores$: JugadoresFakeService,
@@ -47,6 +48,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
     this.gamerService$.getAllGamers().subscribe({
       next: (data) => {
         this.jugadoresFake = data;
+        console.log("Estos son los datos: ",data)
       },
     });
   }
@@ -70,20 +72,23 @@ export class NewGameComponent implements OnInit, OnDestroy {
       .createGame({
         juegoId: this.uuid,
         jugadores: this.getPlayers(),
-        jugadorPrincipalId: 'uid-001',
+        jugadorPrincipalId: "Nestor Quiroga",
       })
       .subscribe({
         next: (data) => console.log('Return data subscription: ', data),
         error: (err) => console.log(err),
         complete: () => {
           console.log('complete');
+          this.router.navigate(['/games']);
         },
+
       });
+
   }
 
   goBoard(): void {
     this.crearGame()
-    this.router.navigate(['/games']);
+
   }
 
   getPlayers() {
