@@ -10,7 +10,7 @@ export class PlayerService {
 
   private jugadoresRef: CollectionReference= collection(
     this.firestore$,
-    'jugadores'
+    'Players'
   );
 
   constructor(private firestore$: Firestore) {}
@@ -23,7 +23,7 @@ export class PlayerService {
   getAllGamers(): Observable<JugadorModel[]> {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
-  
+
 }
 
 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <app-header-nav></app-header-nav>
 <div class="w-full min-h-screen flex justify-center items-center bg-main">
   <div class="w-1/2 bg-main03 m-10 rounded-lg px-20">
@@ -16,7 +17,7 @@
         formControlName="jugadores"
       >
         <option *ngFor="let j of jugadoresFake" [value]="j.uid">
-          {{j.uid}} {{ j.name }}
+          {{ j.name }}
         </option>
       </select>
       <div class="w-full flex justify-center items-center">
@@ -41,8 +42,6 @@
     </form>
   </div>
 </div>
-
-
 
 <!-- Dropdown menu -->
 <!-- <div class="w-full h-full flex justify-center items-center">

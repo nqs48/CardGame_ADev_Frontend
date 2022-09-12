@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root',
 })
 export class GameService {
-
-
   constructor(private httpService$: HttpClient) {}
 
   public createGame(body: any) {
@@ -15,9 +13,17 @@ export class GameService {
     });
   }
 
-  public getGames() {
-    return this.httpService$.get('http://localhost:8080/juego/listar');
+  public getGame(idGame: string) {
+    return this.httpService$.get(
+      `http://localhost:8080/juego/listar/${idGame}`
+    );
   }
 
+  public getAllGames() {
+    return this.httpService$.get(`http://localhost:8080/juego/listar`);
+  }
 
+  // getGames(): Observable<GameModel[]> {
+  //   return this.http.get<GameModel[]>(`${this.BASE_URL}/juegos/`);
+  // }
 }

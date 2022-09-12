@@ -12,23 +12,27 @@ import { GameService } from 'src/app/modules/shared/services/game/game.service';
 import { PlayerService } from 'src/app/modules/shared/services/player/player.service';
 import { SocketService } from 'src/app/modules/shared/services/web-socket/socket.service';
 import { JugadoresFakeService } from '../../services/jugadores-fake.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-new-game',
   templateUrl: './new-game.component.html',
+  template: `<app-new-game [uuid]="uidGame"></app-new-game>`,
   styleUrls: ['./new-game.component.css'],
 })
 export class NewGameComponent implements OnInit, OnDestroy {
   uuid!: string;
   frmJugadores: FormGroup;
   jugadoresFake?: JugadorModel[];
+  jugadores?: JugadorModel[];
 
   constructor(
     private jugadores$: JugadoresFakeService,
     private gamerService$: PlayerService,
     private router: Router,
     private gameService$: GameService,
-    private websocketService$: SocketService
+    private websocketService$: SocketService,
+    private authService$: AuthService
   ) {
     this.frmJugadores = this.createFormJugadores();
     this.uuid = v4();
@@ -61,21 +65,38 @@ export class NewGameComponent implements OnInit, OnDestroy {
     console.log('Submit: ', this.frmJugadores.getRawValue());
   }
 
-  goBoard(): void {
-    // this.router.navigate(['/games']);
+  crearGame() {
     this.gameService$
       .createGame({
         juegoId: this.uuid,
-        jugadores: {
-          'uid-001': 'Nestea',
-          'uid-002': 'Andy',
-        },
+        jugadores: this.getPlayers(),
         jugadorPrincipalId: 'uid-001',
       })
       .subscribe({
         next: (data) => console.log('Return data subscription: ', data),
         error: (err) => console.log(err),
-        complete: () => console.log('complete'),
+        complete: () => {
+          console.log('complete');
+        },
       });
   }
+
+  goBoard(): void {
+    this.crearGame()
+    this.router.navigate(['/games']);
+  }
+
+  getPlayers() {
+    let a=this.jugadoresFake?.reduce(
+      (previous, current) => ({
+        ...previous,
+        [current.uid!]: current.name,
+      }),
+      {}
+    );
+    console.log('Formulario de Jugadores generado: ', a)
+    return a;
+  }
+
+
 }
