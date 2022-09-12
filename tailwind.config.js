@@ -2,7 +2,24 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
+    scale: {
+      0: "0",
+      25: ".25",
+      50: ".5",
+      75: ".75",
+      90: ".9",
+      95: ".95",
+      97: ".97",
+      98: ".98",
+      100: "1",
+      105: "1.05",
+      110: "1.1",
+      125: "1.25",
+      150: "1.5",
+      200: "2",
+    },
     extend: {
+      transform: ["hover", "focus"],
       backgroundImage: {
         "hero-pattern":
           "url('https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80')",

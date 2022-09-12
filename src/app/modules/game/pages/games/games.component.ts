@@ -10,7 +10,6 @@ import { GameService } from 'src/app/modules/shared/services/game/game.service';
 export class GamesComponent implements OnInit {
 
   games: any ;
-  @Input() uuid!: string;
 
   constructor(
     private router: Router,
@@ -19,10 +18,10 @@ export class GamesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.gameService$.getGame("1").subscribe({
+    this.gameService$.getAllGames().subscribe({
       next: (data) => {
-        console.log("Id del Juego: ",this.uuid);
         console.log('Return data games: ', data)
+        this.games=data;
 
       },
       error: (err) => console.log(err),

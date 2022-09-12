@@ -20,7 +20,7 @@ export class GameService {
   }
 
   public getAllGames() {
-    return this.httpService$.get(`http://localhost:8080/juego/listar`);
+    return this.httpService$.get(`http://localhost:8080/juego/listar/`);
   }
 
   // getGames(): Observable<GameModel[]> {
