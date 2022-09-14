@@ -44,17 +44,15 @@
     <div class="flex flex-wrap w-full mb-20">
       <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
         <h1
-          class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
+          class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-200"
         >
-          Pitchfork Kickstarter Taxidermy
+          Games Created
         </h1>
         <div class="h-1 w-20 bg-indigo-500 rounded"></div>
       </div>
       <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
-        Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-        gentrify, subway tile poke farm-to-table. Franzen you probably haven't
-        heard of them man bun deep jianbing selfies heirloom prism food truck
-        ugh squid celiac humblebrag.
+        This game consists of having a deck of Marvel superhero cards, each player betting their cards and the
+        one who has all the cards wins the game.
       </p>
     </div>
     <div class="flex flex-wrap -m-4">
@@ -62,7 +60,10 @@
         class="xl:w-1/4 md:w-1/2 p-4"
         *ngFor="let item of games; let i = index"
       >
-        <button (click)="goBoard()" class="bg-gray-600 p-6 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70">
+        <button
+          (click)="goBoard(item.id)"
+          class="bg-gray-600 p-6 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
+        >
           <img
             class="h-40 rounded w-full object-cover object-center mb-6"
             src="https://i.ytimg.com/vi/UZ-vWZ5Zw5I/maxresdefault.jpg"
@@ -74,14 +75,12 @@
             Id: {{ item.id }}
           </h3>
           <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-            Players {{ item.cantidadJugadores}}
+            Players {{ item.cantidadJugadores }}
           </h2>
-          <p class="leading-relaxed text-base">
-            Main Player: {{ item.uid }}.
-          </p>
+          <p class="leading-relaxed text-base">Main Player: {{ item.uid }}</p>
           <div class="flex justify-center w-full mt-3">
             <button
-              class="active:transform active:scale-90  text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
               Go Board
             </button>

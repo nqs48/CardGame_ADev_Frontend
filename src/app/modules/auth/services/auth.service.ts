@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { GoogleAuthProvider, AuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, AuthProvider} from 'firebase/auth';
 import { JugadorModel } from '../../game/models/jugador.model';
 import { JugadoresFakeService } from '../../game/services/jugadores-fake.service';
 import { PlayerService } from '../../shared/services/player/player.service';
@@ -10,12 +10,15 @@ import { PlayerService } from '../../shared/services/player/player.service';
   providedIn: 'root',
 })
 export class AuthService {
+
+
+
   constructor(
     private ngZone: NgZone,
     private router: Router,
     private afAuth: AngularFireAuth,
     private gamers$: JugadoresFakeService,
-    private createUser$: PlayerService
+    private createUser$: PlayerService,
   ) {}
 
   logout(): void {

@@ -26,10 +26,11 @@ module.exports = {
         "footer-texture": "url('/img/footer-texture.png')",
         logo: "url('https://i.annihil.us/u/prod/marvel/images/mu/web/2021/mu-logo-full-light.png')",
         main: "url('https://wallpapercave.com/wp/wp2903386.gif')",
-        main02:
-          "url('https://preview.redd.it/px4sspxexxl21.jpg?width=640&crop=smart&auto=webp&s=82ae7cfc21981a3c8b6281d83d84e0eb309092e3')",
+        main02: "url('https://wc.wallpaperuse.com/wallp/69-699460_s.jpg')",
         main03:
           "url('https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/997070/6704338131eac5f8ab62a23153e5d5c8712393b1.jpg')",
+        board:
+          "url(https://i.pinimg.com/736x/d1/77/1a/d1771a0fd36ca7771492c91a64b18e4b.jpg)",
       },
     },
   },

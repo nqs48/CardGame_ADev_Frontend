@@ -47,7 +47,7 @@ const routes: Routes = [
     // canActivate: [ GameGuard ],
   },
   {
-    path: 'gameboard',
+    path: 'gameboard/:id',
     component: GameboardComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },

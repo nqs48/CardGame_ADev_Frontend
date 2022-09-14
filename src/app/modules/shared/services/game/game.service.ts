@@ -13,6 +13,10 @@ export class GameService {
     });
   }
 
+  startGame(body: any) {
+    return this.httpService$.post(`http://localhost:8080/juego/iniciar`, body);
+  }
+
   public getGame(idGame: string) {
     return this.httpService$.get(
       `http://localhost:8080/juego/listar/${idGame}`
@@ -20,10 +24,28 @@ export class GameService {
   }
 
   public getAllGames() {
-    return this.httpService$.get(`http://localhost:8080/juego/listar/`);
+    return this.httpService$.get(`http://localhost:8080/juego/listar`);
   }
 
-  // getGames(): Observable<GameModel[]> {
-  //   return this.http.get<GameModel[]>(`${this.BASE_URL}/juegos/`);
-  // }
+  public getBoard(idGame: string) {
+    return this.httpService$.get(`http://localhost:8080/juego/${idGame}`);
+  }
+
+  public startRound(body: any) {
+    return this.httpService$.post(
+      `http://localhost:8080/juego/ronda/iniciar`,
+      body
+    );
+  }
+
+  public getMazo(idPlayer: string) {
+    return this.httpService$.get(
+      `http://localhost:8080/jugador/mazo/${idPlayer}`
+    );
+  }
+
+  public putCard(body: any) {
+    return this.httpService$.post(`http://localhost:8080/juego/poner`, body);
+  }
 }
+
