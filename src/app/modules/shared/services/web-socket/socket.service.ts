@@ -5,7 +5,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   providedIn: 'root',
 })
 export class SocketService {
-  
+
   websocket!: WebSocketSubject<unknown>;
 
   constructor() {}
@@ -17,11 +17,11 @@ export class SocketService {
   }
 
   //Cerrar conexion socket
-  public disconnect() {
-    this.websocket.complete();
-  }
-
   // public disconnect() {
-  //   this.websocket.unsubscribe();
+  //   this.websocket.complete();
   // }
+
+  public disconnect() {
+    this.websocket.unsubscribe();
+  }
 }

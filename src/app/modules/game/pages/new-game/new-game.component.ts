@@ -101,24 +101,20 @@ export class NewGameComponent implements OnInit, OnDestroy {
 
   goBoard(): void {
     this.newGame();
-    console.log(this.actualPlayer);
-    console.log('Jugadores Actuales FormGroup:' + this.frmJugadores.getRawValue());
-    console.log('Jugadores Actuales:' + this.jugadores);
-    console.log('Jugadores Actuales:' + this.jugadoresLog);
   }
 
 
-  
+
   getPlayers() {
-    let a = this.jugadoresLog?.reduce(
+    let object = this.jugadoresLog?.reduce(
       (previous, current) => ({
         ...previous,
         [current.uid!]: current.name,
       }),
       {}
     );
-    console.log('Formulario de Jugadores generado: ', a);
-    return a;
+    console.log('Objeto de Jugadores generado: ', object);
+    return object;
   }
 
 

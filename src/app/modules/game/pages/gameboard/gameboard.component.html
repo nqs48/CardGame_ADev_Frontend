@@ -8,28 +8,54 @@
       <h2
         class=" text-indigo-500 tracking-widest font-medium title-font mb-1"
       >
-        Ronda
+        Ronda {{ numeroRonda }}
       </h2>
       <h2
         class=" text-indigo-500 tracking-widest font-medium title-font mb-1"
       >
-        Jugadores
+        Jugadores {{jugadoresRonda }} / {{ jugadoresTablero}}
       </h2>
-      <h3 class="font-medium title-font text-white">TIEMPO: </h3>
+      <h3 class="font-medium title-font text-white">TIEMPO: {{ tiempo }}</h3>
     </div>
 
-    <div class="flex flex-wrap m-4 p-4 w-full">
-      <div class="relative sm:w-1/5 p-4">
-        <div class="flex justify-center p-1 rounded-lg opacity-90">
-          <img
-            class="h-full rounded w-full object-cover object-center"
-            src="https://i.pinimg.com/236x/b5/3c/19/b53c1928b37ad1b56b93724aeab65017--game-cards-card-games.jpg"
-            alt="content"
-          />
-        </div>
-      </div>
+    <div class="flex flex-wrap m-4 p-4 w-full" *ngFor="let card of cartasDelTablero">
 
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+          <div class="relative sm:w-1/5 p-4" *ngIf="card.estaHabilitada">
+            <div
+              class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-98 opacity-70"
+            >
+              <img
+                class="h-40 rounded w-full object-cover object-center mb-6"
+                src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
+                alt="content"
+              />
+              <div class="bg-black opacity-70">
+                <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
+                  XP: ?
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative sm:w-1/5 p-4" *ngIf="card.estaHabilitada">
+            <div
+              class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-98 opacity-70"
+            >
+              <img
+                class="h-40 rounded w-full object-cover object-center mb-6"
+                src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
+                alt="content"
+              />
+              <div class="bg-black opacity-70">
+                <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
+                  XP: {{card.poder}}
+                </h2>
+              </div>
+            </div>
+          </div>
+    </div>
+
+      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
         <button
           class="bg-main02 pb-6 px-2 pt-0 rounded-lg opacity-80"
         >
@@ -41,22 +67,26 @@
           <div class="bg-black opacity-70">
             <h2 class="text-lg text-gray-200 font-medium mb-4">
             XP 100
-          </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
+          </h2>          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
           </div>
         </button>
-      </div>
+      </div> -->
 
 
-    </div>
+
 
   </div>
 
   <div class="flex justify-center mb-10 mt-5 ">
-    <button
+    <button (click)="startRound()"
         class="text-white hover:bg-gray-900  bg-red-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none active:transform active:scale-95"
       >
         Start Round
+    </button>
+    <button (click)="disconnectRound()"
+        class="text-white hover:bg-gray-900  bg-red-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none active:transform active:scale-95"
+      >
+        End Socket
     </button>
   </div>
 
@@ -80,13 +110,14 @@
             <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
             XP {{carta.poder}}
           </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300"> {{carta.uri }}</h2>
+          <h2 class="leading-relaxed text-lg font-semibold text-gray-300"> {{carta.uri}}</h2>
           </div>
 
           <div class="flex justify-center w-full mt-3">
             <button
-              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
+             (click)="putCard(carta.cartaId)"
+              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+
               Put
             </button>
           </div>
