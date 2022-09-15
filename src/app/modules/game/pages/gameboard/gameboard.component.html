@@ -1,6 +1,6 @@
 <app-header-nav></app-header-nav>
 
-<section class="text-gray-600 body-font bg-main03  min-h-100">
+<section class="text-gray-600 body-font bg-main03 min-h-full">
   <div
     class="flex flex-wrap rounded-xl max-h-min p-20 mx-20 opacity-80 border"
   >
@@ -8,14 +8,14 @@
       <h2
         class=" text-indigo-500 tracking-widest font-medium title-font mb-1"
       >
-        Ronda #2
+        Ronda
       </h2>
       <h2
         class=" text-indigo-500 tracking-widest font-medium title-font mb-1"
       >
-        Jugadores 1/5
+        Jugadores
       </h2>
-      <h3 class="font-medium title-font text-white">TIEMPO: 50s</h3>
+      <h3 class="font-medium title-font text-white">TIEMPO: </h3>
     </div>
 
     <div class="flex flex-wrap m-4 p-4 w-full">
@@ -63,10 +63,11 @@
   <!-- //Titulo de mi mi mazo -->
   <div class="flex flex-col bg-black opacity-80 pt-2 mt-10 rounded-t-xl">
     <h1 class="m-4 p-4 w-full text-center text-2xl font-bold">Tu Mazo</h1>
-    <div class="flex flex-wrap mx-4 px-4 justify-center">
+
+    <div class="flex flex-wrap mx-4 px-4 justify-center" >
 
       <!-- Carta 01 -->
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+      <div class="xl:w-1/5 md:w-1/5 p-4" *ngFor="let carta of mazoDelJugador?.cartas" >
         <button
           class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
@@ -77,9 +78,9 @@
           />
           <div class="bg-black opacity-70">
             <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP 100
+            XP {{carta.poder}}
           </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
+          <h2 class="leading-relaxed text-lg font-semibold text-gray-300"> {{carta.uri }}</h2>
           </div>
 
           <div class="flex justify-center w-full mt-3">
@@ -93,7 +94,7 @@
       </div>
 
       <!-- Carta 02 -->
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
         <button
           class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
@@ -117,11 +118,11 @@
             </button>
           </div>
         </button>
-      </div>
+      </div> -->
 
 
       <!-- Carta 03 -->
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
         <button
           class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
@@ -145,10 +146,10 @@
             </button>
           </div>
         </button>
-      </div>
+      </div> -->
 
       <!-- Carta 04 -->
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
         <button
           class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
@@ -172,11 +173,11 @@
             </button>
           </div>
         </button>
-      </div>
+      </div> -->
 
       <!-- Carta 05 -->
 
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
         <button
           class="bg-main02  pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
@@ -200,10 +201,10 @@
             </button>
           </div>
         </button>
-      </div>
+      </div> -->
 
       <!-- Carta 06 -->
-      <div class="xl:w-1/5 md:w-1/5 p-4">
+      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
         <button
           class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
@@ -227,7 +228,7 @@
             </button>
           </div>
         </button>
-      </div>
+      </div> -->
 
     </div>
   </div>
