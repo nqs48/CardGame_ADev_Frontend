@@ -13,7 +13,7 @@ import { BoardModel } from '../../models/board.model';
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.css'],
 })
-export class GameboardComponent implements OnInit, OnDestroy {
+export class GameboardComponent implements OnInit{
   gameId!: string;
   userId!: any;
   puntaje: number = 0;
@@ -32,6 +32,8 @@ export class GameboardComponent implements OnInit, OnDestroy {
   ganadorJuego: string = '';
   perdedorRonda: string = '';
 
+  jugadoresLog: any;
+
   constructor(
     private websocket$: SocketService,
     private activateRoute: ActivatedRoute,
@@ -41,6 +43,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.authService$.getUserAuth().then((res) => (this.userId = res?.uid));
+    
   }
 
   ngOnInit(): void {
@@ -66,15 +69,6 @@ export class GameboardComponent implements OnInit, OnDestroy {
         this.numeroRonda = element.ronda.numero;
       });
 
-      // this.gameService$.getMazo(this.userId, this.gameId).subscribe({
-      //   next: (res) => {
-      //     this.mazoDelJugador = res;
-      //     console.log('Return data mazo: ', res);
-      //   },
-      //   error: (err) => console.log(err),
-      //   complete: () => console.log('complete'),
-      // });
-
       //Traer el mazo del jugador actual
       this.gameService$
         .getMazo(this.userId, this.gameId)
@@ -95,17 +89,17 @@ export class GameboardComponent implements OnInit, OnDestroy {
               uri: event.carta.url,
             });
           }
-          // if (event.type === 'cardgame.cartaretiradademazo') {
-          //   this.cartasDelJugador = this.cartasDelJugador.filter(
-          //     (item: { cartaId: any }) =>
-          //       item.cartaId !== event.carta.cartaId.uuid
-          //   );
-          // }
           if (event.type === 'cardgame.cartaretiradademazo') {
             this.cartasDelJugador = this.cartasDelJugador.filter(
-              (item) => item.cartaId !== event.carta.cartaId.uuid
+              (item: { cartaId: any }) =>
+                item.cartaId !== event.carta.cartaId.uuid
             );
           }
+          // if (event.type === 'cardgame.cartaretiradademazo') {
+          //   this.cartasDelJugador = this.cartasDelJugador.filter(
+          //     (item) => item.cartaId !== event.carta.cartaId.uuid
+          //   );
+          // }
           if (event.type === 'cardgame.tiempocambiadodeltablero') {
             this.tiempo = event.tiempo;
           }
@@ -133,18 +127,22 @@ export class GameboardComponent implements OnInit, OnDestroy {
                   uri: carta.url,
                 });
               });
-              //SETEAR PUNTOS AL USUARIO
-              this.puntaje += event.puntos;
-              // this.authService.setUserPuntos(
-              //   JSON.parse(localStorage.getItem('user')!).uid,
-              //   this.puntaje
-              // );
-              alert('Ganaste ' + event.puntos + ' puntaje');
-            } else {
-              alert('perdiste');
-            }
+            //   //SETEAR PUNTOS AL USUARIO
+            //   this.puntaje += event.puntos;
+            //   // this.authService.setUserPuntos(
+            //   //   JSON.parse(localStorage.getItem('user')!).uid,
+            //   //   this.puntaje
+            //   // );
+            //   alert('Ganaste ' + event.puntos + ' puntaje');
+            // } else {
+            //   alert('perdiste');
+            // }
           }
+        }
           if (event.type === 'cardgame.juegofinalizado') {
+
+            this.authService$.getUserAuth().then((res) => console.log(res));
+
             this.ganadorJuego = 'Ganador del juego = ' + event.alias;
             alert('El ganador del juego es: ' + event.alias);
             this.router.navigate(['/games']);
@@ -158,9 +156,9 @@ export class GameboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.websocket$.disconnect();
-  }
+  // ngOnDestroy(): void {
+  //   this.websocket$.disconnect();
+  // }
 
   //Funcion para conectar el juegoId al web socket
   // connectWebSocket() {
