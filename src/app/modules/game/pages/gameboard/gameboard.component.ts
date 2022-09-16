@@ -140,7 +140,7 @@ export class GameboardComponent implements OnInit{
               alert('Has perdido');
             }
           }
-        }
+        
           if (event.type === 'cardgame.juegofinalizado') {
             if (this.userId === event.jugadorId.uuid) {
 

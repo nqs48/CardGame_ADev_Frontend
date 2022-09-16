@@ -8,19 +8,12 @@ import { JugadorModel } from '../../../game/models/jugador.model';
   providedIn: 'root',
 })
 export class PlayerService {
-
-  userId: any;
-
   private jugadoresRef: CollectionReference = collection(
     this.firestore$,
     'Players'
   );
 
-  constructor(private firestore$: Firestore, private authService$: AuthService) {
-
-    this.authService$.getUserAuth().then((res) => (this.userId = res?.uid));
-  }
-
+  constructor(private firestore$: Firestore) {}
 
   addGamer(jugador: JugadorModel) {
     const gamerRef = doc(this.jugadoresRef, jugador.uid || '');
@@ -31,9 +24,8 @@ export class PlayerService {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
 
-  updateUserScore(s: String) {
-    const gamerRef = doc(this.jugadoresRef, 'uid');
-    return setDoc(gamerRef, { score: s }, { merge: true });
+  getPlayer(lista: any) {
+    lista.forEach((element: any) => {});
   }
 
   // setUserPuntos(userId: string, puntos: number) {
