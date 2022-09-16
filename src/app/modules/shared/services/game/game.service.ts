@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { MazoModel } from 'src/app/modules/game/models/mazo.model';
 import { BoardModel } from 'src/app/modules/game/models/board.model';
+import { PutCardModel } from 'src/app/modules/game/models/putcard.model';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,7 @@ export class GameService {
     );
   }
 
-  public putCard(body: any) {
+  public putCard(body: PutCardModel) {
     return this.httpService$.post(`http://localhost:8080/juego/poner`, body);
   }
 

@@ -40,12 +40,7 @@ export class GamesComponent implements OnInit {
         console.log('Return data star Game: ', data);
         console.log('Game started successfully!!!');
 
-        this.socketService$.connect(gameId).subscribe({
-          next: (data) => {
-            console.log('Return socket subscription (gameId): ', data);
-          },
-          error: (err) => console.log(err),
-        });
+        this.socketService$.connect(gameId).subscribe();
       },
       error: (err) => console.log(err),
       complete: () => {

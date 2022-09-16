@@ -1,9 +1,7 @@
 <app-header-nav></app-header-nav>
 
-<section class="text-gray-600 body-font bg-main03 min-h-full">
-  <div
-    class="flex flex-wrap rounded-xl max-h-min p-20 mx-20 opacity-80 border"
-  >
+<section class="text-gray-600 body-font bg-main03 min-h-screen">
+  <div class="flex flex-col opacity-80 pt-2 rounded-xl max-h-min p-20 mx-20 border">
     <div class="flex justify-evenly text-center w-full m-5">
       <h2
         class=" text-indigo-500 tracking-widest font-medium title-font mb-1"
@@ -15,44 +13,48 @@
       >
         Jugadores {{jugadoresRonda }} / {{ jugadoresTablero}}
       </h2>
-      <h3 class="font-medium title-font text-white">TIEMPO: {{ tiempo }}</h3>
+      <h3 class="font-medium title-font text-white">TIEMPO: {{ tiempo }}  Sec.</h3>
     </div>
 
-    <div class="flex flex-wrap m-4 p-4 w-full" *ngFor="let card of cartasDelTablero">
+    <div class="flex flex-wrap mx-4 px-4 justify-center" >
 
-          <div class="relative sm:w-1/5 p-4" *ngIf="card.estaHabilitada">
-            <div
-              class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-98 opacity-70"
-            >
-              <img
-                class="h-40 rounded w-full object-cover object-center mb-6"
-                src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-                alt="content"
-              />
-              <div class="bg-black opacity-70">
-                <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-                  XP: ?
-                </h2>
-              </div>
-            </div>
-          </div>
+      <div class="xl:w-1/5 md:w-1/5 p-4" *ngFor="let card of cartasDelTablero">
 
-          <div class="relative sm:w-1/5 p-4" *ngIf="card.estaHabilitada">
-            <div
-              class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-98 opacity-70"
-            >
-              <img
-                class="h-40 rounded w-full object-cover object-center mb-6"
-                src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-                alt="content"
-              />
-              <div class="bg-black opacity-70">
-                <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-                  XP: {{card.poder}}
-                </h2>
+
+              <div *ngIf="!card.estaHabilitada"
+                class="border border-gray-800 rounded-lg hover:transform hover:scale-95 opacity-70"
+              >
+                <img
+
+                  class="rounded w-full object-cover object-center mb-6"
+                  src="https://i.pinimg.com/236x/b5/3c/19/b53c1928b37ad1b56b93724aeab65017--game-cards-card-games.jpg"
+                  alt="content"
+                />
               </div>
-            </div>
-          </div>
+
+              <div *ngIf="card.estaHabilitada"
+                class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-98 opacity-70"
+              >
+                <img
+                  class="h-40 rounded w-full object-cover object-center mb-6"
+                  src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
+                  alt="content"
+                />
+                <div class="bg-black opacity-70">
+                  <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
+                    XP: {{card.poder}}
+                  </h2>
+                </div>
+              </div>
+
+
+
+
+            <!-- <div class="relative sm:w-1/5 p-4" *ngIf="card.estaHabilitada">
+
+            </div> -->
+      </div>
+
     </div>
 
       <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
@@ -78,15 +80,8 @@
   </div>
 
   <div class="flex justify-center mb-10 mt-5 ">
-    <button (click)="startRound()"
-        class="text-white hover:bg-gray-900  bg-red-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none active:transform active:scale-95"
-      >
+    <button (click)="startRound()"  class="text-white hover:bg-gray-900  bg-red-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none active:transform active:scale-95">
         Start Round
-    </button>
-    <button (click)="disconnectRound()"
-        class="text-white hover:bg-gray-900  bg-red-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none active:transform active:scale-95"
-      >
-        End Socket
     </button>
   </div>
 
@@ -96,9 +91,12 @@
 
     <div class="flex flex-wrap mx-4 px-4 justify-center" >
 
+
       <!-- Carta 01 -->
-      <div class="xl:w-1/5 md:w-1/5 p-4" *ngFor="let carta of mazoDelJugador?.cartas" >
+      <div class="xl:w-1/5 md:w-1/5 p-4" *ngFor="let card of cartasDelJugador" >
+        <div *ngIf="!card.estaOculta">
         <button
+        (click)="putCardAction(card.cartaId)" 
           class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
         >
           <img
@@ -108,158 +106,22 @@
           />
           <div class="bg-black opacity-70">
             <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP {{carta.poder}}
+            XP {{card.poder}}
           </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300"> {{carta.uri}}</h2>
           </div>
 
           <div class="flex justify-center w-full mt-3">
             <button
-             (click)="putCard(carta.cartaId)"
+
               class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
 
               Put
             </button>
           </div>
         </button>
+        </div>
       </div>
 
-      <!-- Carta 02 -->
-      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
-        <button
-          class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
-        >
-          <img
-            class="h-40 rounded w-full object-cover object-center mb-6"
-            src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-            alt="content"
-          />
-          <div class="bg-black opacity-70">
-            <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP 100
-          </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
-          </div>
-
-          <div class="flex justify-center w-full mt-3">
-            <button
-              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Put
-            </button>
-          </div>
-        </button>
-      </div> -->
-
-
-      <!-- Carta 03 -->
-      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
-        <button
-          class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
-        >
-          <img
-            class="h-40 rounded w-full object-cover object-center mb-6"
-            src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-            alt="content"
-          />
-          <div class="bg-black opacity-70">
-            <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP 100
-          </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
-          </div>
-
-          <div class="flex justify-center w-full mt-3">
-            <button
-              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Put
-            </button>
-          </div>
-        </button>
-      </div> -->
-
-      <!-- Carta 04 -->
-      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
-        <button
-          class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
-        >
-          <img
-            class="h-40 rounded w-full object-cover object-center mb-6"
-            src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-            alt="content"
-          />
-          <div class="bg-black opacity-70">
-            <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP 100
-          </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
-          </div>
-
-          <div class="flex justify-center w-full mt-3">
-            <button
-              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Put
-            </button>
-          </div>
-        </button>
-      </div> -->
-
-      <!-- Carta 05 -->
-
-      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
-        <button
-          class="bg-main02  pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
-        >
-          <img
-            class="h-40 rounded w-full object-cover object-center mb-6"
-            src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-            alt="content"
-          />
-          <div class="bg-black opacity-70">
-            <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP 100
-          </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
-          </div>
-
-          <div class="flex justify-center w-full mt-3">
-            <button
-              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Put
-            </button>
-          </div>
-        </button>
-      </div> -->
-
-      <!-- Carta 06 -->
-      <!-- <div class="xl:w-1/5 md:w-1/5 p-4">
-        <button
-          class="bg-main02 border border-gray-800 pb-6 px-2 pt-0 rounded-lg hover:transform hover:scale-95 active:transform active:scale-90 opacity-70"
-        >
-          <img
-            class="h-40 rounded w-full object-cover object-center mb-6"
-            src="https://i.3djuegos.com/juegos/14468/the_avengers_project/fotos/maestras/the_avengers_project-4898850.jpg"
-            alt="content"
-          />
-          <div class="bg-black opacity-70">
-            <h2 class="text-lg font-bold text-gray-200 font-medium title-font mb-4">
-            XP 100
-          </h2>
-          <h2 class="leading-relaxed text-lg font-semibold text-gray-300">IRONMAN:</h2>
-          </div>
-
-          <div class="flex justify-center w-full mt-3">
-            <button
-              class="active:transform active:scale-90 text-white bg-gray-900 hover:bg-red-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Put
-            </button>
-          </div>
-        </button>
-      </div> -->
 
     </div>
   </div>
