@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, setDoc, CollectionReference, collectionData, doc, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { JugadorModel } from '../../../game/models/jugador.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerService {
+
+  userId: any;
+
   private jugadoresRef: CollectionReference = collection(
     this.firestore$,
     'Players'
   );
 
+  constructor(private firestore$: Firestore, private authService$: AuthService) {
 
+    this.authService$.getUserAuth().then((res) => (this.userId = res?.uid));
+  }
 
-  constructor(private firestore$: Firestore) {}
 
   addGamer(jugador: JugadorModel) {
     const gamerRef = doc(this.jugadoresRef, jugador.uid || '');
@@ -25,13 +31,9 @@ export class PlayerService {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
 
-  getPlayer(lista: any){
-    lista.forEach((element: any) => {
-
-      
-
-    });
-
+  updateUserScore(s: String) {
+    const gamerRef = doc(this.jugadoresRef, 'uid');
+    return setDoc(gamerRef, { score: s }, { merge: true });
   }
 
   // setUserPuntos(userId: string, puntos: number) {

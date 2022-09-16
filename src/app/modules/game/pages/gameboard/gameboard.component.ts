@@ -13,7 +13,7 @@ import { BoardModel } from '../../models/board.model';
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.css'],
 })
-export class GameboardComponent implements OnInit, OnDestroy {
+export class GameboardComponent implements OnInit{
   gameId!: string;
   userId!: any;
   puntaje: number = 0;
@@ -33,6 +33,8 @@ export class GameboardComponent implements OnInit, OnDestroy {
   WinnerGame: string = '';
   LoserRound: string = '';
 
+  jugadoresLog: any;
+
   constructor(
     private websocket$: SocketService,
     private activateRoute: ActivatedRoute,
@@ -42,15 +44,12 @@ export class GameboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.authService$.getUserAuth().then((res) => (this.userId = res?.uid));
-
     this.playerService$.getAllGamers().subscribe({
       next: (data) => {
         this.playersLog = data;
         console.log('Estos son los datos: ', data);
       },
     });
-
-
   }
 
   ngOnInit(): void {
@@ -97,17 +96,17 @@ export class GameboardComponent implements OnInit, OnDestroy {
               uri: event.carta.url,
             });
           }
-          // if (event.type === 'cardgame.cartaretiradademazo') {
-          //   this.cartasDelJugador = this.cartasDelJugador.filter(
-          //     (item: { cartaId: any }) =>
-          //       item.cartaId !== event.carta.cartaId.uuid
-          //   );
-          // }
           if (event.type === 'cardgame.cartaretiradademazo') {
             this.cartasDelJugador = this.cartasDelJugador.filter(
-              (item) => item.cartaId !== event.carta.cartaId.uuid
+              (item: { cartaId: any }) =>
+                item.cartaId !== event.carta.cartaId.uuid
             );
           }
+          // if (event.type === 'cardgame.cartaretiradademazo') {
+          //   this.cartasDelJugador = this.cartasDelJugador.filter(
+          //     (item) => item.cartaId !== event.carta.cartaId.uuid
+          //   );
+          // }
           if (event.type === 'cardgame.tiempocambiadodeltablero') {
             this.tiempo = event.tiempo;
           }
@@ -136,14 +135,13 @@ export class GameboardComponent implements OnInit, OnDestroy {
                 });
               });
               this.puntaje += event.puntos;
-
-              // alert('Ganaste ' + event.puntos + ' puntaje');
+              alert('Ganaste ' + event.puntos + ' puntaje');
             } else {
               alert('Has perdido');
             }
           }
+        }
           if (event.type === 'cardgame.juegofinalizado') {
-
             if (this.userId === event.jugadorId.uuid) {
 
               let player = this.playersLog.find((player: any) => player.uid === this.userId);
@@ -156,6 +154,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
             }
             this.WinnerGame = 'Ganador del juego = ' + event.alias;
             alert(`El ganador del juego es: ${event.alias}, has Obtenido ${this.scoreGame} puntos de recompensa!!`);
+
             this.router.navigate(['/games']);
           }
         },
@@ -169,9 +168,9 @@ export class GameboardComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
-    this.websocket$.disconnect();
-  }
+  // ngOnDestroy(): void {
+  //   this.websocket$.disconnect();
+  // }
 
   //Funcion para conectar el juegoId al web socket
   // connectWebSocket() {

@@ -17,7 +17,6 @@ export class AuthService {
     private ngZone: NgZone,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private gamers$: JugadoresFakeService,
     private createUser$: PlayerService,
   ) {}
 
@@ -38,6 +37,8 @@ export class AuthService {
     return this.OAuthProvider(new GoogleAuthProvider())
       .then((res) => {
         console.log('Successfully logged in!');
+
+
       })
       .catch((error) => {
         console.log(error);
@@ -50,8 +51,6 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((res) => {
-
-
         const gamer: JugadorModel = {
           uid: res.user?.uid || '',
           name: res.user?.displayName || '',
