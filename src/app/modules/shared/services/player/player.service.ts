@@ -25,6 +25,15 @@ export class PlayerService {
     return collectionData(this.jugadoresRef) as Observable<JugadorModel[]>;
   }
 
+  getPlayer(lista: any){
+    lista.forEach((element: any) => {
+
+      
+
+    });
+
+  }
+
   // setUserPuntos(userId: string, puntos: number) {
   //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(
   //     `users/${userId}`

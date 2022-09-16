@@ -45,12 +45,16 @@ export class AuthService {
   }
 
   private OAuthProvider(provider: AuthProvider) {
+    localStorage.setItem('scoreUser', '0');
     return this.afAuth
       .signInWithPopup(provider)
       .then((res) => {
+
+
         const gamer: JugadorModel = {
           uid: res.user?.uid || '',
           name: res.user?.displayName || '',
+          puntaje: localStorage.getItem('scoreUser')
         };
         this.createUser$.addGamer(gamer).then((res) => {
           console.log('Usuario creado');

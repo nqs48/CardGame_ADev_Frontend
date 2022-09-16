@@ -17,8 +17,9 @@ export class GameboardComponent implements OnInit, OnDestroy {
   gameId!: string;
   userId!: any;
   puntaje: number = 0;
+  playersLog!: any;
+  puntajeAcoulado:any;
 
-  //mazoDelJugador!: MazoModel;
   cartasDelJugador: CardModel[] = [];
   cartasDelTablero: CardModel[] = [];
   tiempo: number = 0;
@@ -26,7 +27,6 @@ export class GameboardComponent implements OnInit, OnDestroy {
   jugadoresTablero: number = 0;
   numeroRonda: number = 0;
   roundStarted: boolean = false;
-  //isMainPlayer: boolean = false;
 
   ganadorRonda: string = '';
   ganadorJuego: string = '';
@@ -41,10 +41,20 @@ export class GameboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.authService$.getUserAuth().then((res) => (this.userId = res?.uid));
+
+    this.playerService$.getAllGamers().subscribe({
+      next: (data) => {
+        this.playersLog = data;
+        console.log('Estos son los datos: ', data);
+      },
+    });
+
+
   }
 
   ngOnInit(): void {
-    console.log('Id del usuario: ' + this.userId);
+
+
 
     //Traer ID del juego a traves de params
     this.activateRoute.params.subscribe((params) => {
@@ -65,15 +75,6 @@ export class GameboardComponent implements OnInit, OnDestroy {
         this.jugadoresTablero = element.tablero.jugadores.length;
         this.numeroRonda = element.ronda.numero;
       });
-
-      // this.gameService$.getMazo(this.userId, this.gameId).subscribe({
-      //   next: (res) => {
-      //     this.mazoDelJugador = res;
-      //     console.log('Return data mazo: ', res);
-      //   },
-      //   error: (err) => console.log(err),
-      //   complete: () => console.log('complete'),
-      // });
 
       //Traer el mazo del jugador actual
       this.gameService$
@@ -122,7 +123,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
             this.cartasDelTablero = [];
           }
           if (event.type === 'cardgame.cartasasignadasaganador') {
-            console.log(event)
+            console.log(event);
             if (event.ganadorId.uuid === this.userId) {
               event.cartasApostadas.forEach((carta: any) => {
                 this.cartasDelJugador.push({
@@ -139,14 +140,26 @@ export class GameboardComponent implements OnInit, OnDestroy {
               //   JSON.parse(localStorage.getItem('user')!).uid,
               //   this.puntaje
               // );
-              alert('Ganaste ' + event.puntos + ' puntaje');
+              // alert('Ganaste ' + event.puntos + ' puntaje');
             } else {
-              alert('perdiste');
+              // alert('perdiste');
             }
           }
           if (event.type === 'cardgame.juegofinalizado') {
-            this.ganadorJuego = 'Ganador del juego = ' + event.alias;
-            alert('El ganador del juego es: ' + event.alias);
+
+            if (this.userId === event.jugadorId.uuid) {
+
+              let player = this.playersLog.find((player: any) => player.uid === this.userId);
+              console.log(player);
+              this.puntaje = 1000;
+              player.puntaje = parseInt(player.puntaje) + this.puntaje;
+              player.puntaje.toString();
+              this.playerService$.addGamer(player);
+            }
+
+
+            // this.ganadorJuego = 'Ganador del juego = ' + event.alias;
+            // alert('El ganador del juego es: ' + event.alias);
             this.router.navigate(['/games']);
           }
         },
@@ -156,6 +169,8 @@ export class GameboardComponent implements OnInit, OnDestroy {
         },
       });
     });
+
+
   }
 
   ngOnDestroy(): void {
@@ -180,7 +195,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
   }
 
   putCardAction(cardId: string) {
-    if(this.roundStarted){
+    if (this.roundStarted) {
       this.gameService$
         .putCard({
           cartaId: cardId,
@@ -190,4 +205,9 @@ export class GameboardComponent implements OnInit, OnDestroy {
         .subscribe();
     }
   }
+
+
+
+
+
 }
