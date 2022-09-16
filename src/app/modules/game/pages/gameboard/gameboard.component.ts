@@ -18,7 +18,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
   userId!: any;
   puntaje: number = 0;
   playersLog!: any;
-  puntajeAcoulado:any;
+  puntajeAcomulado:any;
 
   cartasDelJugador: CardModel[] = [];
   cartasDelTablero: CardModel[] = [];
@@ -27,10 +27,11 @@ export class GameboardComponent implements OnInit, OnDestroy {
   jugadoresTablero: number = 0;
   numeroRonda: number = 0;
   roundStarted: boolean = false;
+  scoreGame: number= 1000;
 
-  ganadorRonda: string = '';
-  ganadorJuego: string = '';
-  perdedorRonda: string = '';
+  WinnerRound: string = '';
+  WinnerGame: string = '';
+  LoserRound: string = '';
 
   constructor(
     private websocket$: SocketService,
@@ -134,15 +135,11 @@ export class GameboardComponent implements OnInit, OnDestroy {
                   uri: carta.url,
                 });
               });
-              //SETEAR PUNTOS AL USUARIO
               this.puntaje += event.puntos;
-              // this.authService.setUserPuntos(
-              //   JSON.parse(localStorage.getItem('user')!).uid,
-              //   this.puntaje
-              // );
+
               // alert('Ganaste ' + event.puntos + ' puntaje');
             } else {
-              // alert('perdiste');
+              alert('Has perdido');
             }
           }
           if (event.type === 'cardgame.juegofinalizado') {
@@ -151,15 +148,14 @@ export class GameboardComponent implements OnInit, OnDestroy {
 
               let player = this.playersLog.find((player: any) => player.uid === this.userId);
               console.log(player);
-              this.puntaje = 1000;
-              player.puntaje = parseInt(player.puntaje) + this.puntaje;
+              player.puntaje = parseInt(player.puntaje) + this.scoreGame;
+              player.puntajeCartas = parseInt(player.puntajeCartas)+ this.puntaje;
               player.puntaje.toString();
+              player.puntajeCartas.toString();
               this.playerService$.addGamer(player);
             }
-
-
-            // this.ganadorJuego = 'Ganador del juego = ' + event.alias;
-            // alert('El ganador del juego es: ' + event.alias);
+            this.WinnerGame = 'Ganador del juego = ' + event.alias;
+            alert(`El ganador del juego es: ${event.alias}, has Obtenido ${this.scoreGame} puntos de recompensa!!`);
             this.router.navigate(['/games']);
           }
         },

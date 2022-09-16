@@ -9,10 +9,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderNavComponent implements OnInit {
-  constructor(
-    private authService$: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService$: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -25,7 +22,11 @@ export class HeaderNavComponent implements OnInit {
     this.router.navigate(['/games']);
   }
 
-  btnIndex(): void{
+  btnIndex(): void {
     this.router.navigate(['/home']);
+  }
+
+  btnScores(): void {
+    this.router.navigate(['/scores']);
   }
 }

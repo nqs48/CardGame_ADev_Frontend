@@ -14,6 +14,7 @@ import { GamesComponent } from './modules/game/pages/games/games.component';
 import { GameboardComponent } from './modules/game/pages/gameboard/gameboard.component';
 import { FormLoginComponent } from './modules/auth/components/form-login/form-login.component';
 import { InitComponent } from './modules/game/pages/init/init.component';
+import { ScoreviewComponent } from './modules/game/pages/scoreview/scoreview.component';
 // import { GameGuard } from './modules/game/guards/game.guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
@@ -49,6 +50,13 @@ const routes: Routes = [
   {
     path: 'gameboard/:id',
     component: GameboardComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    // canActivate: [ GameGuard ],
+  },
+  {
+    path: 'scores',
+    component: ScoreviewComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     // canActivate: [ GameGuard ],
