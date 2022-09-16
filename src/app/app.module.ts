@@ -25,6 +25,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { FormLoginComponent } from './modules/auth/components/form-login/form-login.component';
 import { InitComponent } from './modules/game/pages/init/init.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ScoreviewComponent } from './modules/game/pages/scoreview/scoreview.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     GamesComponent,
     GameboardComponent,
     InitComponent,
+    ScoreviewComponent,
   ],
   imports: [
     AuthModule,
